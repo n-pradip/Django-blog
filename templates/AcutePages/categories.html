@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Technospace::Categories{% endblock title %}
+{% block header_files %}<link rel="stylesheet" href="{% static 'css/categories.css' %}">{% endblock header_files %}
+
+{% block body %}
+<div class="blogpost_hero d-flex justify-content-center align-items-center">
+    <div class="main_title">Categories</div>
+</div>
+<div class="container pt-5">
+    <div class="subscribe_blog">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for each in all_categories %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="../media/{{each.image}}" class="card-img-top" alt="...">
+                        <a href="category/{{each.id}}" style="text-decoration: none;color: black;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{each.name}}</h5>
+                                <p class="card-text">{{each.description}}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

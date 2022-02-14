@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../static/css/login.css">
+    <title>Technospace::Login</title>
+</head>
+<body>
+    <div class="box">
+        <div class="left">
+            <img src="../../media/root_images/login_left_hero.jpg" alt="">
+        </div>
+        <div class="right">
+            <div class="wrapper">
+                <div class="title">
+                    <div class="logo d-flex justify-content-center">
+                        <img src="../../media/root_images/techno_space_logo.png" alt="" width="70px">
+                    </div>
+                    <span class="logo_text d-flex justify-content-center">Technospace</span>
+                </div>
+            </div>
+            <div class="center_box d-flex .flex-row justify-content-center align-content-center">
+                <div class="box_a">
+                    <div class="signupbox">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <p class="txt">Email</p>
+                            <input type="text" name="username" class="form" placeholder="Enter email / username ...">
+                            <p class="txt">Password</p>
+                            <input type="password" name="password" class="form" placeholder="Enter password here...">
+                            <button type="submit" class='ts-btn'>Login</button>
+                        </form>
+                        <p>Don't have an account? <strong><a href="{% url 'register' %}" class="text-decoration-none text-dark">Register here</a></strong></p>
+                        {% for each_message in messages  %}
+                        <div class="alert alert-warning alert-dismissible cs-alert" role="alert">
+                            <strong>{{each_message}}</strong>
+                          </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

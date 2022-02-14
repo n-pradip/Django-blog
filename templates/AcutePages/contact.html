@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Technospace::Contact{{post.title}}{% endblock title %}
+{% block header_files %}<link rel="stylesheet" href="{% static 'css/contact.css' %}">{% endblock header_files %}
+
+{% block body %}
+
+<div class="hero d-flex justify-content-center align-items-center">
+    <div class="main_title">Contact admin</div>
+</div>
+<div class="larger_container mb-5">
+    {% for each_message in messages  %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{each_message}}</strong>
+      </div>
+    {% endfor %}
+    <div class="center_box d-flex .flex-row justify-content-center align-content-center">
+        <div class="box">
+            <div class="signupbox">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <p class="txt">Full name</p>
+                    <input type="text" name="full_name" class="form" placeholder="Enter full name">
+                    <p class="txt">Reason to contact</p>
+                    <input type="text" name="subject" class="form" placeholder="Enter subject to contact">
+                    <p class="txt">Email</p>
+                    <input type="text" name="email" class="form" placeholder="Enter email">
+                    <p class="txt">Enter your messsage</p>
+                    <textarea name="contact" name="msg" class="form" rows="5"></textarea>
+                    <button type="submit" class='cs_techno_btn'>Send message</button>
+                </form>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    Please check your mail, your consern will be addressed on  mail directly
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Technospace::Homepage{% endblock title %}
+{% block header_files %}<link rel="stylesheet" href="{% static 'css/each_cat_page.css' %}">{% endblock header_files %}
+
+{% block body %}
+    <div class="blogpost_hero d-flex justify-content-center align-items-center">
+        <div class="main_title">Blogs related to {{cat.name}}</div>
+    </div>
+
+    <div class="container">
+
+        {% for each in page_obj %}
+            <div class="blog_card bdr-1sb cs-shadows">
+                <div class="card_grid">
+                    <div class="card_text d-flex flex-column">
+                        <div class="card_cat pb-2">
+                            {{each.category}}
+                        </div>
+                        <div class="card_title">
+                            {{each.title}}
+                        </div>
+                        <div class="card_subtitle text-muted pb-3">
+                            {{each.author}} | {{each.date}}
+                        </div>
+                        <div class="card_content">
+                            {{each.content|truncatechars_html:125|safe}}
+                        <br>
+                        <a href=" {% url 'blogpostPage' each.slug %} "><button type="submit" class="cs_techno_btn d-inline-block mt-2">Read full article</button></a>
+                        </div> 
+                    </div>
+                    <div class="card_img">
+                        <img src="/media/{{each.image}}" alt="">
+                    </div>
+                </div>
+            </div> 
+        {% endfor page_obj %}
+
+        <div class="container d-flex justify-content-center align-items-center my-2">
+            {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}" class="text-decoration-none px-2 bdr">Previous</a>
+            {% endif %}
+    
+            <span class="px-2 bdr">Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span> 
+    
+            {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}" class="text-decoration-none px-2 bdr">Next</a> 
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    
+{% endblock body %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Technospace::{{post.title}}{% endblock title %}
+{% block header_files %}<link rel="stylesheet" href="{% static 'css/blogpost.css' %}">{% endblock header_files %}
+
+{% block body %}
+    <div class="blogpost_hero d-flex justify-content-center align-items-center">
+        <div class="cat_name">{{post.category}}</div>
+    </div>               
+    <div class="container mt-5">
+        <div class="row g-5">
+            <div class="col-md-8">
+                <h5 class="main_title mb-2">{{post.title}}</h5>
+                <div class="sub_desc_title text-muted mb-5">
+                    {{post.author}} | {{post.date}}
+                </div>
+                <div class="content">
+                    {{post.content|safe}}
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="position-sticky" style="top: 1rem;">
+                    <div class="same_cat_posts">
+                        <h5 class="mb-3 lbdr">Latest posts</h5>  <!-- Top 10 latest post from main stack-->
+                        {% for each in latest_ten_post %}
+                            <p class="right_txt_bdr pb-2" ><a href="{% url 'blogpostPage' each.slug %}" class="side_text">{{each.title|truncatechars:50}}</a></p>
+                        {% endfor latest_ten_post %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+    
+    

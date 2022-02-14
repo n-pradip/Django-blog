@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Technospace::Homepage{% endblock title %}
+{% block header_files %}<link rel="stylesheet" href="{% static 'css/homepage.css' %}">{% endblock header_files %}
+
+{% block body %}
+    <div class="hero_img">
+        
+    </div>
+
+    <div class="container mt-5">
+        <div class="row g-5">
+
+            <!-- Left column -->
+            <div class="col-md-9">
+                <!-- Top featured news -->
+                <a href="blogpost/{{featured_post.slug}}">
+                    <div class="card">
+                        <img src="../../media/root_images/alessio-lin-AxlHH0jX6Gs-unsplash.jpg" class="card-img-top" height="250px" alt="..." style="object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{featured_post.title}}</h5>
+                            <p class="card-text">{{featured_post.content|truncatechars_html:150 |safe}}</p>
+                        </div>
+                    </div>
+                </a>
+                <!--Here comes filtered 3 most viewed post -->
+                <div class="rest_featured_news d-flex flex-row">
+                    <div class="card-group">
+                        {% for each in three_featured_cards %}
+                            <div class="card">
+                                <img src="/media/{{each.image}}" class="card-img-top" height="200px" alt="...">
+                                <a href="blogpost/{{each.slug}}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{each.title}}</h5>
+                                        <p class="card-text">{{each.content|truncatechars:100 |safe}}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor three_featured_cards %}
+                    </div>
+                </div>
+                {% for each in rest_posts %}
+                    <div class="blog_card bdr-1sb cs-shadows">
+                        <div class="card_grid">
+                            <div class="card_text d-flex flex-column">
+                                <div class="card_cat pb-2">
+                                    {{each.category}}
+                                </div>
+                                <div class="card_title">
+                                    {{each.title}}
+                                </div>
+                                <div class="card_subtitle text-muted pb-3">
+                                    {{each.author}} | {{each.date}}
+                                </div>
+                                <div class="card_content">
+                                    {{each.content|truncatechars_html:125|safe}}
+                                <br>
+                                <a href="blogpost/{{each.slug}}"><button type="submit" class="cs_techno_btn d-inline-block mt-2">Read full article</button></a>
+                                </div> 
+                            </div>
+                            <div class="card_img">
+                                <img src="/media/{{each.image}}" alt="">
+                            </div>
+                        </div>
+                    </div> 
+                {% endfor rest_posts %}
+
+            </div>
+
+
+            <!-- Right column -->
+            <div class="col-md-3">
+                <div class="position-sticky" style="top: 1rem;">
+                    <div class="same_cat_posts">
+                        <h5 class="mb-3 lbdr">Most read posts</h5>  <!-- Top 10 post of stack-->
+                        {% for each in latest_news %}
+                            <p class="right_txt_bdr pb-2" ><a href="blogpost/{{each.slug}}">{{each.title|truncatechars:50}}</a></p>
+                        {% endfor latest_news %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+{% endblock body %}
